@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:200,200i,300,300i,400,400i,600,600i,700,700i,900&display=swap');
+
+*{margin: 0;padding: 0;}
+ol, ul{list-style: none;}
+a{text-decoration: none; color: inherit;}
+
+.cf::before, .cf::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.show{display: block;}
+.none{display: none;}
+
+form input{
+    width: 50%;
+    background: none;
+    font-size: 30px;
+    text-align: center;
+    color:#fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+}
+
+form input::placeholder{
+    text-align:center;
+    color:#fff;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body{
+    position: relative;
+    height: 100vh;
+    background: url(../img/1.jpg) no-repeat center;
+    background-size: cover;
+    font: 30px 'Titillium Web', sans-serif;
+}
+
+.content{
+    position: absolute;
+    left: 50%; top: 50%;
+    width: auto;
+    padding: 30px 50px;
+    transform: translate(-50%,-50%);
+    background:rgba(0,0,0,0.2);
+    border-radius: 30px;
+    text-align: center;
+    color: #fff;
+}
+.weather{display: block;}
+
+.clockWrap{padding:10px 0;}
+
+.clockWrap .dateText{font-size: 50px;}
+.clockWrap .timeText{line-height: 1;font-size: 100px;}
+
+.userWrap{padding:10px 0;}
+.userWrap p{font-weight: 700;}
+.userWrap form{}
+.userWrap form input{width: 50%;}
+
+.listWrap{padding:10px 0;}
+.listWrap form{width: 100%;}
+.listWrap form input{width: 80%;}
+.listWrap > div{
+    float: left;
+    width: 48%;
+    margin: 10px 0;
+    font-size: 20px;
+}
+.listWrap > div + div{margin-left: 4%;}
+.listWrap > div h4{font-size: 20px;}
+.listWrap > div ul li{
+    position: relative;
+    margin: 5px 0;
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #fff;
+}
+.listWrap li button {
+    position: absolute;
+    top: 50%; right: 5px;
+    width: 20px;
+    height: 20px;
+    background:none;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    transform: translateY(-50%);
+}
+.listWrap li button:nth-child(2){right: 30px;}
+.listWrap li button:active{background: rgba(0,0,0,0.4);}
+
