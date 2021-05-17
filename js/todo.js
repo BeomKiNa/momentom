@@ -1,183 +1,150 @@
 const listWrap = document.querySelector(".listWrap"),
-    toDoForm = listWrap.querySelector("form"),
-    toDoinput = toDoForm.querySelector("input"),
-    listP = listWrap.querySelector(".pendding"),
-    listF = listWrap.querySelector(".finished");
+  toDoForm = listWrap.querySelector("form"),
+  toDoinput = toDoForm.querySelector("input"),
+  listP = listWrap.querySelector(".pending"),
+  listF = listWrap.querySelector(".finished");
 
 const P_LS = "PENDING",
-    F_LS ="FINISHED";
+  F_LS = "FINISHED";
 
-let P_toDos,F_toDos;
+let P_toDos = [],
+  F_toDos = [];
 
-// function paintToDo(text,ul,array){
-//     const li = document.createElement("li"),
-//         delBtn = document.createElement("button"),
-//         cheBackBtn = document.createElement("button"),
-//         toDoText = document.createTextNode(text),
-//         delText = document.createTextNode("❌"),
-//         cheText = document.createTextNode("✔"),
-//         backText = document.createTextNode("◀");
-
-//     delBtn.appendChild(delText);
-//     if(ul === listP){
-//         cheBackBtn.appendChild(cheText);
-//     }else if(ul === listF){
-//         cheBackBtn.appendChild(backText);
-//     }
-//     backBtn.appendChild(backText);
-//     li.appendChild(toDoText);
-//     li.appendChild(delBtn);
-//     li.appendChild(cheBackBtn);
-//     li.id = array.length + 1;
-//     ul.appendChild(li);
-// }
-
-// function loadToDo(){
-//     const P_List = localStorage.getItem(P_LS),
-//         F_List = localStorage.getItem(F_LS);
-
-//     if(P_List!==null){
-//         paintToDo(P_List,listP,P_toDos);
-//     }else{
-//         return false;
-//     }
-
-//     if(F_List!==null){
-//         paintToDo(F_List,listF,P_toDos);
-//     }else{
-//         return false;
-//     }
-// }
-
-function getTaskObj(text){
-    return{
-        id: String(Date.now()),
-        text
-    };
+function getObj(text) {
+  return (toDoObj = {
+    id: String(Date.now()),
+    text,
+  });
 }
 
-function addToFinished(list){
-    F_toDos.push(list);
+function saveToDos() {
+  localStorage.setItem(P_LS, JSON.stringify(P_toDos));
+  localStorage.setItem(F_LS, JSON.stringify(F_toDos));
 }
 
-function addToPending(list){
-    P_toDos.push(list);
+function removeFromPending(id) {
+  P_toDos = P_toDos.filter((toDo) => toDo.id !== id);
 }
 
-function findInFinished(id){
-    return F_toDos.find(function(list){
-        return list.id === id;
-    });
+function removeFromFinished(id) {
+  F_toDos = F_toDos.filter((toDo) => toDo.id !== id);
 }
 
-function findInPending(id){
-    return P_toDos.find(function(list){
-        return list.id === id;
-    });
+function deleteToDo(e) {
+  const li = e.target.parentNode;
+  li.parentNode.removeChild(li);
+  removeFromPending(li.id);
+  removeFromFinished(li.id);
+  saveToDos();
 }
 
-function removeFromFinished(id){
-    F_toDos = F_toDos.filter(function(list){
-        return list.id !== id;
-    });
+function findToPending(id) {
+  return P_toDos.find((toDo) => toDo.id == id);
 }
 
-function removeFromPending(id){
-    P_toDos = P_toDos.filter(function(list){
-        return list.id !== id;
-    });
+function findToFinished(id) {
+  return F_toDos.find((toDo) => toDo.id == id);
 }
 
-function backList(e){
-    const li = e.target.parentNode;
-    li.parentNode.removeChild(li);
-    const task = findInFinished(li.id);
-    removeFromFinished(li.id);
-    addToPending(task);
-    paintPendingToDo(task);
-    saveToDos();
+function addToPending(taskObj) {
+  P_toDos.push(taskObj);
 }
 
-function checkList(e){
-    const li = e.target.parentNode;
-    li.parentNode.removeChild(li);
-    const task = findInPending(li.id);
-    removeFromPending(li.id);
-    addToFinished(task);
-    paintFinishedToDo(task);
-    saveToDos();
+function addToFinished(taskObj) {
+  F_toDos.push(taskObj);
 }
 
-function deleteList(e){
-    const li = e.target.parentNode;
-    li.parentNode.removeChild(li);
-    removeFromFinished(li.id);
-    removeFromPending(li.id);
-    saveToDos();
+function checkToDo(e) {
+  const li = e.target.parentNode;
+  const task = findToPending(li.id);
+  li.parentNode.removeChild(li);
+  removeFromPending(li.id);
+  addToFinished(task);
+  finishedPaintToDo(task);
+  saveToDos();
 }
 
-function bulidList(task){
-    const li = document.createElement("li"),
-        span = document.createElement("span"),
-        delBtn = document.createElement("button");
-    span.innerText = task.text;
-    delBtn.innerText = "❌";
-    delBtn.addEventListener("click",deleteList);
-    li.append(span, delBtn);
-    li.id = task.id;
-    return li;
+function backToDo(e) {
+  const li = e.target.parentNode;
+  const task = findToFinished(li.id);
+  li.parentNode.removeChild(li);
+  removeFromFinished(li.id);
+  addToPending(task);
+  pendingPaintToDo(task);
+  saveToDos();
 }
 
-function paintPendingToDo(task){
-    const list = bulidList(task),
-        cheBtn = document.createElement("button");
-    cheBtn.innerText = "✔";
-    cheBtn.addEventListener("click",checkList);
-    list.append(cheBtn);
-    listP.append(list);
+function createBtn(name) {
+  const btn = document.createElement("button");
+  let icon = "";
+  let handleBtn;
+  btn.classList.add(name);
+  switch (name) {
+    case "checkBtn":
+      icon = "✅";
+      handleBtn = checkToDo;
+      break;
+    case "delBtn":
+      icon = "❌";
+      handleBtn = deleteToDo;
+      break;
+    case "backBtn":
+      handleBtn = backToDo;
+      icon = "⬅️";
+      break;
+  }
+  btn.innerText = icon;
+  btn.addEventListener("click", handleBtn);
+  return btn;
 }
 
-function paintFinishedToDo(task){
-    const list = bulidList(task),
-        backBtn = document.createElement("button");
-    backBtn.innerText = "◀";
-    backBtn.addEventListener("click",backList);
-    list.append(backBtn);
-    listF.append(list);
+function createList(id, text) {
+  const li = document.createElement("li");
+  const delBtn = createBtn("delBtn");
+  const span = document.createElement("span");
+  span.innerText = text;
+  li.append(span, delBtn);
+  li.id = id;
+  return li;
 }
 
-function saveToDos(){
-    localStorage.setItem(P_LS,JSON.stringify(P_toDos));
-    localStorage.setItem(F_LS,JSON.stringify(F_toDos));
+function finishedPaintToDo(obj) {
+  const list = createList(obj.id, obj.text);
+  const backBtn = createBtn("backBtn");
+  list.append(backBtn);
+  listF.appendChild(list);
 }
 
-function loadToDo(){
-    P_toDos = JSON.parse(localStorage.getItem(P_LS)) || [];
-    F_toDos = JSON.parse(localStorage.getItem(F_LS)) || [];
+function pendingPaintToDo(obj) {
+  const list = createList(obj.id, obj.text);
+  const checkBtn = createBtn("checkBtn");
+  list.append(checkBtn);
+  listP.appendChild(list);
 }
 
-function restoreToDos(){
-    P_toDos.forEach(function(list){
-        paintPendingToDo(list)
-    });
-    F_toDos.forEach(function(list){
-        paintFinishedToDo(list)
-    });
+function loadToDos() {
+  P_toDos = JSON.parse(localStorage.getItem(P_LS)) || [];
+  F_toDos = JSON.parse(localStorage.getItem(F_LS)) || [];
 }
 
-function handleFormSubmit(e){
-    e.preventDefault();
-    const taskObj = getTaskObj(toDoinput.value);
-    toDoinput.value = "";
-    paintPendingToDo(taskObj);
-    addToPending(taskObj);
-    saveToDos();
+function restoreToDos() {
+  P_toDos.map((toDo) => pendingPaintToDo(toDo));
+  F_toDos.map((toDo) => finishedPaintToDo(toDo));
 }
 
-function init(){
-    toDoForm.addEventListener("submit",handleFormSubmit);
-    loadToDo();
-    restoreToDos();
+function handleSubmit(e) {
+  e.preventDefault();
+  const toDoObj = getObj(toDoinput.value);
+  P_toDos.push(toDoObj);
+  pendingPaintToDo(toDoObj);
+  toDoinput.value = "";
+  saveToDos();
+}
+
+function init() {
+  toDoForm.addEventListener("submit", handleSubmit);
+  loadToDos();
+  restoreToDos();
 }
 
 init();
