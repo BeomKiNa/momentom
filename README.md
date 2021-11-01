@@ -12,4 +12,4 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 
 ## Github Pages Link
 
-[Visit NOW!](https://beomki69.github.io/Momentom/)
+[Visit NOW!](https://nabeomki.github.io/momentom/)
