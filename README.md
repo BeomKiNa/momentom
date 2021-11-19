@@ -13,3 +13,11 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 ## Github Pages Link
 
 [Visit NOW!](https://nabeomki.github.io/momentom/)
+
+## Changelog
+
+---
+
+### v1.0
+
+- 노마드코더의 Momentum clone
