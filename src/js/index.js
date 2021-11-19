@@ -1,1 +1,3 @@
-console.log("hi");
+import App from "./App.js";
+
+new App(document.getElementById("App"));

@@ -1,27 +1,25 @@
-const body = document.querySelector("body");
+class BgImg {
+  IMG_NUM = 11;
+  constructor($target) {
+    this.$target = $target;
+    this.setState();
+  }
 
-const IMG_NUM = 11;
+  getRandom = () => {
+    return Math.floor(Math.random() * this.IMG_NUM) + 1;
+  };
 
+  setState() {
+    this.imgNumber = this.getRandom();
+    this.render();
+  }
 
-function paintBg(imgNumber){
+  render() {
     const img = new Image();
-    img.src = `img/${imgNumber}.jpg`;
+    img.src = `img/${this.imgNumber}.jpg`;
 
-    body.setAttribute("style",`background-image: url(${img.src})`);
-    // console.log(imgNumber);
+    this.$target.setAttribute("style", `background-image: url(${img.src})`);
+  }
 }
 
-
-function getRandom(){
-    const random = Math.floor(Math.random()*IMG_NUM)+1;
-    return random;
-}
-
-
-
-function init(){
-    const randomNum = getRandom();
-    paintBg(randomNum);
-}
-
-init();
+export default BgImg;
