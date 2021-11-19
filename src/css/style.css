@@ -46,11 +46,9 @@ form input::placeholder {
   font-family: "Titillium Web", sans-serif;
 }
 
-/* body {
-    height: 100vh;
-    background: url(../img/1.jpg) no-repeat center;
-    font: 30px "Titillium Web", sans-serif;
-} */
+body {
+  font: 30px "Titillium Web", sans-serif;
+}
 
 #App {
   position: relative;
