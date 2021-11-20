@@ -60,7 +60,7 @@ class Pending {
         ${toDos
           .map(
             (toDo) =>
-              `<li id=${toDo.id}>${toDo.text}<button class="${CHECK} ${BTN}">Check</button><button class="${DEL} ${BTN}">❌</button></li>`
+              `<li id=${toDo.id}>${toDo.text}<button class="${CHECK} ${BTN}">✅</button><button class="${DEL} ${BTN}">❌</button></li>`
           )
           .join("")}
       </ul>

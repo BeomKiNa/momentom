@@ -60,7 +60,7 @@ class Finished {
         ${toDos
           .map(
             (toDo) =>
-              `<li id=${toDo.id}>${toDo.text}<button class="${BACK} ${BTN}">Back</button><button class="${DEL} ${BTN}">❌</button></li>`
+              `<li id=${toDo.id}>${toDo.text}<button class="${BACK} ${BTN}">↩️</button><button class="${DEL} ${BTN}">❌</button></li>`
           )
           .join("")}
       </ul>

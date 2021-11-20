@@ -11,7 +11,7 @@ class ToDoForm {
     e.preventDefault();
     const $input = e.target.todo;
     const value = $input.value;
-    if (value) return;
+    if (!value) return;
     $input.value = "";
     this.newToDo(value);
   };
