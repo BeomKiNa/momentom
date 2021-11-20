@@ -21,3 +21,9 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 ### v1.0
 
 - 노마드코더의 Momentum clone
+
+### v2.0
+
+- http-server 추가
+- 기존의 함수로 구현한 내용을 class로 변경
+- HTML도 class내에서 생성해 추가하도록 변경
