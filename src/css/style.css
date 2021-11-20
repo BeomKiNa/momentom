@@ -22,13 +22,6 @@ a {
   clear: both;
 }
 
-.show {
-  display: block;
-}
-.none {
-  display: none;
-}
-
 form input {
   width: 50%;
   background: none;
@@ -90,8 +83,6 @@ body {
 .userWrap p {
   font-weight: 700;
 }
-.userWrap form {
-}
 .userWrap form input {
   width: 50%;
 }
@@ -105,19 +96,19 @@ body {
 .listWrap form input {
   width: 80%;
 }
-.listWrap > div {
+.listWrap > article {
   float: left;
   width: 48%;
   margin: 10px 0;
   font-size: 20px;
 }
-.listWrap > div + div {
+.listWrap > article + article {
   margin-left: 4%;
 }
-.listWrap > div h4 {
+.listWrap > article h4 {
   font-size: 20px;
 }
-.listWrap > div ul li {
+.listWrap > article ul li {
   position: relative;
   margin: 5px 0;
   padding: 5px;
