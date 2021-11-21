@@ -5,7 +5,7 @@ class App {
   constructor($target) {
     this.bg = new BgImg({ $target });
 
-    this.Content = new Content({ $target });
+    this.content = new Content({ $target });
   }
 }
 
