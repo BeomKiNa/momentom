@@ -3,7 +3,7 @@ import Pending from "./Pending.js";
 import ToDoForm from "./ToDoForm.js";
 
 class ToDo {
-  constructor($target) {
+  constructor({ $target }) {
     this.$listWrap = document.createElement("section");
     this.$listWrap.className = "listWrap cf";
 
@@ -30,10 +30,6 @@ class ToDo {
 
     $target.appendChild(this.$listWrap);
   }
-
-  setState() {}
-
-  render() {}
 }
 
 export default ToDo;

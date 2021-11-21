@@ -1,6 +1,7 @@
+import { DAYS } from "./constants.js";
+
 class Clock {
-  DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  constructor($target) {
+  constructor({ $target }) {
     this.$clockWrap = document.createElement("article");
     this.$clockWrap.className = "clockWrap";
 
@@ -34,11 +35,15 @@ class Clock {
   }
 
   render() {
-    const { seconds, minutes, hours, day, date, month } = this.nowDate;
-    this.$clockWrap.innerHTML = `
+    const {
+      nowDate: { seconds, minutes, hours, day, date, month },
+      $clockWrap,
+    } = this;
+
+    $clockWrap.innerHTML = `
         <p class="dateText">
             ${month < 10 ? `0${month}` : month} /
-            ${date < 10 ? `0${date}` : date} ${this.DAYS[day]}
+            ${date < 10 ? `0${date}` : date} ${DAYS[day]}
         </p>
         <p class="timeText">
             ${hours < 10 ? `0${hours}` : hours} :

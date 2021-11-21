@@ -1,19 +1,20 @@
+import { USER_NAME } from "./constants.js";
+
 class UserName {
-  USER_LS = "userName";
   userName = null;
 
-  constructor($target) {
+  constructor({ $target }) {
     this.$userWrap = document.createElement("div");
     $target.appendChild(this.$userWrap);
     this.getUser();
   }
 
   setUser = (name) => {
-    localStorage.setItem(this.USER_LS, JSON.stringify(name));
+    localStorage.setItem(USER_NAME, JSON.stringify(name));
   };
 
   getUser = () => {
-    const name = JSON.parse(localStorage.getItem(this.USER_LS));
+    const name = JSON.parse(localStorage.getItem(USER_NAME));
     this.setState(name);
   };
 
@@ -32,19 +33,17 @@ class UserName {
   }
 
   render() {
-    const { userName } = this;
+    const { userName, $userWrap, onSubmit } = this;
     if (userName) {
-      this.$userWrap.innerHTML = `<p>Hello ${userName}</p>`;
+      $userWrap.innerHTML = `<p>Hello ${userName}</p>`;
     } else {
-      this.$userWrap.innerHTML = `
+      $userWrap.innerHTML = `
         <form action="#" class="nameForm">
             <input type="text" placeholder="Hello Stranger" id="name" />
         </form>
         `;
 
-      this.$userWrap
-        .querySelector("form")
-        .addEventListener("submit", this.onSubmit);
+      $userWrap.querySelector("form").addEventListener("submit", onSubmit);
     }
   }
 }

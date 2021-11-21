@@ -4,18 +4,18 @@ import UserName from "./userName.js";
 import Weather from "./weather.js";
 
 class Content {
-  constructor($target) {
+  constructor({ $target }) {
     this.$target = $target;
     this.$content = document.createElement("section");
     this.$content.className = "content";
 
     this.weather = new Weather({ $target: this.$content });
 
-    this.clock = new Clock(this.$content);
+    this.clock = new Clock({ $target: this.$content });
 
-    this.userName = new UserName(this.$content);
+    this.userName = new UserName({ $target: this.$content });
 
-    this.toDo = new ToDo(this.$content);
+    this.toDo = new ToDo({ $target: this.$content });
 
     this.$target.appendChild(this.$content);
   }
