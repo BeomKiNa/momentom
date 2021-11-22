@@ -10,7 +10,7 @@ class TasksContainer {
 
     this.taskForm = new TaskForm({
       $target: this.$listWrap,
-      newTask: (text) => {
+      handleNewTask: (text) => {
         const taskObj = {
           id: String(Date.now()),
           text,

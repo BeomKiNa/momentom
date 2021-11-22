@@ -1,16 +1,27 @@
 import { DAYS } from "./constants.js";
 
 class Clock {
+  $clockWrap = null;
+  nowDate = {
+    seconds: null,
+    minutes: null,
+    hours: null,
+    day: null,
+    date: null,
+    month: null,
+  };
+
   constructor({ $target }) {
     this.$clockWrap = document.createElement("article");
     this.$clockWrap.className = "clockWrap";
 
     $target.appendChild(this.$clockWrap);
+    this.getTime = this.getTime.bind(this);
     this.getTime();
     setInterval(this.getTime, 1000);
   }
 
-  getTime = () => {
+  getTime() {
     const nowDate = new Date(),
       seconds = nowDate.getSeconds(),
       minutes = nowDate.getMinutes(),
@@ -27,7 +38,7 @@ class Clock {
       date,
       month,
     });
-  };
+  }
 
   setState(nowDateObj) {
     this.nowDate = nowDateObj;

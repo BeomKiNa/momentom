@@ -1,13 +1,15 @@
 class BgImg {
   static _IMG_NUM = 11;
+  imgNumber = 0;
+
   constructor({ $target }) {
     this.$target = $target;
     this.setState();
   }
 
-  getRandom = () => {
+  getRandom() {
     return Math.floor(Math.random() * BgImg._IMG_NUM) + 1;
-  };
+  }
 
   setState() {
     this.imgNumber = this.getRandom();

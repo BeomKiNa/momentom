@@ -2,33 +2,37 @@ import { USER_NAME } from "./constants.js";
 
 class UserName {
   userName = null;
+  $userWrap = null;
 
   constructor({ $target }) {
     this.$userWrap = document.createElement("div");
     $target.appendChild(this.$userWrap);
+    this.onSubmit = this.onSubmit.bind(this);
     this.getUser();
   }
 
-  setUser = (name) => {
-    localStorage.setItem(USER_NAME, JSON.stringify(name));
-  };
+  setUser() {
+    const { userName } = this;
+    localStorage.setItem(USER_NAME, JSON.stringify(userName));
+  }
 
-  getUser = () => {
+  getUser() {
     const name = JSON.parse(localStorage.getItem(USER_NAME));
     this.setState(name);
-  };
+  }
 
-  onSubmit = (e) => {
+  onSubmit(e) {
     e.preventDefault();
     const $nameInput = e.target.name;
     const value = $nameInput.value;
+    if (!value) return;
     $nameInput.value = "";
     this.setState(value);
-  };
+  }
 
   setState(name) {
     this.userName = name;
-    if (name) this.setUser(name);
+    this.setUser();
     this.render();
   }
 

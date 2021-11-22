@@ -1,6 +1,9 @@
 class TaskForm {
-  constructor({ $target, newTask }) {
-    this.newTask = newTask;
+  handleNewTask = null;
+  $form = null;
+
+  constructor({ $target, handleNewTask }) {
+    this.handleNewTask = handleNewTask;
     this.$form = document.createElement("form");
     $target.appendChild(this.$form);
     this.onSubmit = this.onSubmit.bind(this);
@@ -14,11 +17,13 @@ class TaskForm {
     const value = $input.value;
     if (!value) return;
     $input.value = "";
-    this.newTask(value);
+    this.handleNewTask(value);
   }
 
   render() {
-    this.$form.innerHTML = `
+    const { $form } = this;
+
+    $form.innerHTML = `
       <input type="text" placeholder="Write a to do" id="taskForm" required/>
     `;
   }

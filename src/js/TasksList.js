@@ -2,6 +2,8 @@ import { BTN, DEL } from "./constants.js";
 
 class TasksList {
   _tasks = [];
+  title = null;
+  $wrap = null;
 
   constructor({ $target, title }) {
     this.title = title;

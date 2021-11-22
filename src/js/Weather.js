@@ -1,6 +1,8 @@
 import { COORDS } from "./constants.js";
 
 class Weather {
+  API_KEY = "8fe1baf3aef0a2073f16346b8f874d78";
+  $weather = null;
   weather = {
     place: null,
     sky: null,
@@ -10,13 +12,16 @@ class Weather {
   constructor({ $target }) {
     this.$weather = document.createElement("span");
     this.$weather.className = "weather";
+    this.handleGeoSucces = this.handleGeoSucces.bind(this);
+    this.handleGeoError = this.handleGeoError.bind(this);
     $target.appendChild(this.$weather);
     this.loadCoords();
   }
 
-  getWeather = () => {
+  getWeather() {
     const {
       coordsObj: { latitude: lat, longitude: lng },
+      render,
     } = this;
 
     fetch(
@@ -37,41 +42,40 @@ class Weather {
           sky,
           temp,
         };
-        this.render();
+        render();
       });
-  };
+  }
 
-  handleGeoSucces = (position) => {
+  handleGeoSucces(position) {
     const {
       coords: { latitude, longitude },
     } = position;
 
     this.setState({ latitude, longitude });
-  };
+  }
 
-  handleGeoError = () => {
+  handleGeoError() {
     console.log("sorry error");
-  };
+  }
 
-  askForCoords = () => {
-    navigator.geolocation.getCurrentPosition(
-      this.handleGeoSucces,
-      this.handleGeoError
-    );
-  };
+  askForCoords() {
+    const { handleGeoSucces, handleGeoError } = this;
+    navigator.geolocation.getCurrentPosition(handleGeoSucces, handleGeoError);
+  }
 
-  saveCoords = () => {
+  saveCoords() {
     localStorage.setItem(COORDS, JSON.stringify(this.coordsObj));
-  };
+  }
 
-  loadCoords = () => {
+  loadCoords() {
+    const { askForCoords, setState } = this;
     const getCoords = JSON.parse(localStorage.getItem(COORDS)) || null;
     if (getCoords === null) {
-      this.askForCoords();
+      askForCoords();
     } else {
-      this.setState(getCoords);
+      setState(getCoords);
     }
-  };
+  }
 
   async setState(coordsObj) {
     this.coordsObj = coordsObj;
