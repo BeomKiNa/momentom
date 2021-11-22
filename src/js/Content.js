@@ -1,5 +1,5 @@
 import Clock from "./Clock.js";
-import ToDo from "./todo.js";
+import TasksContainer from "./TasksContainer.js";
 import UserName from "./userName.js";
 import Weather from "./weather.js";
 
@@ -15,7 +15,7 @@ class Content {
 
     this.userName = new UserName({ $target: this.$content });
 
-    this.toDo = new ToDo({ $target: this.$content });
+    this.tasksContainer = new TasksContainer({ $target: this.$content });
 
     this.$target.appendChild(this.$content);
   }

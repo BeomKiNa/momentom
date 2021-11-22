@@ -1,35 +1,38 @@
+import { FINISHED, PENDING } from "./constants.js";
 import Finished from "./Finished.js";
 import Pending from "./Pending.js";
-import ToDoForm from "./ToDoForm.js";
+import TaskForm from "./TaskForm.js";
 
-class ToDo {
+class TasksContainer {
   constructor({ $target }) {
     this.$listWrap = document.createElement("section");
     this.$listWrap.className = "listWrap cf";
 
-    this.toDoForm = new ToDoForm({
+    this.taskForm = new TaskForm({
       $target: this.$listWrap,
-      newToDo: (text) => {
-        const toDoObj = {
+      newTask: (text) => {
+        const taskObj = {
           id: String(Date.now()),
           text,
         };
-        this.pending.addToDo(toDoObj);
+        this.pending.addTask(taskObj);
       },
     });
 
     this.pending = new Pending({
       $target: this.$listWrap,
-      handleCheck: (toDoObj) => this.finished.addToDo(toDoObj),
+      handleCheck: (taskObj) => this.finished.addTask(taskObj),
+      title: PENDING,
     });
 
     this.finished = new Finished({
       $target: this.$listWrap,
-      handleBack: (toDoObj) => this.pending.addToDo(toDoObj),
+      handleBack: (taskObj) => this.pending.addTask(taskObj),
+      title: FINISHED,
     });
 
     $target.appendChild(this.$listWrap);
   }
 }
 
-export default ToDo;
+export default TasksContainer;
