@@ -42,4 +42,4 @@ Cloning Momentum with Vanilla JS, HTML and CSS
       - 부모 메서드를 super.method(...)로 호출 불가능, 따라서 확장 불가능
    3. this
       - 일반적인 경우에 차이가 없으나 비동기 _(setInterval, addEventListener...)_ 나 내부 함수일 경우에 함수선언문으로 작성된 메서드의 this는 전역 객체를 가리킴. 화살표함수의 경우 여전히 생성된 인스턴스 객체를 가리킴
-      - 함수선언문의 경우 이를 방지하기 위해 bind _(또는 apply, call)_ 메서드를 사용해 this가 인스턴스 객체에 바인딩 시키는 작업이 필요함.
+      - 함수선언문의 경우 이를 방지하기 위해서 bind _(또는 apply, call)_ 메서드를 사용해 this가 인스턴스 객체에 바인딩 시키는 작업이 필요함.
