@@ -4,7 +4,8 @@
   "description": "Cloning Momentum with Vanilla JS, HTML and CSS",
   "main": "index.js",
   "scripts": {
-    "dev": "http-server src/",
+    "dev": "http-server",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,10 +18,18 @@
     "url": "https://github.com/NaBeomKi/momentom/issues"
   },
   "homepage": "https://github.com/NaBeomKi/momentom#readme",
-  "dependencies": {
-    "http-server": "^14.0.0"
-  },
   "devDependencies": {
-    "eslint": "^8.2.0"
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.2.0",
+    "http-server": "^14.0.0",
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  },
+  "dependencies": {
+    "regenerator-runtime": "^0.13.9"
   }
 }
