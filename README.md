@@ -40,6 +40,8 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 
    `TasksList`를 상속하는 `Pending`과 `Finished`에서 메서드의 확장을 위해 `super`를 사용하려했으나, 화살표함수였기 때문에 `super`가 동작하지 않음.
 
+   #### 원인
+
    1. 함수선언문
       - prototype에 메서드 추가
       - 부모 메서드를 `super.method(...)`로 호출해 확장 가능
@@ -79,6 +81,8 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 
    이 때 `askForCoords`와 `setState`, 두 메서드내에서 `this`를 상실해 `undefined`가 되어 오류가 발생
 
+   #### 원인
+
    - 함수를 인자로 전달할 경우, 함수를 호출하게 되면 `this`를 상실하게 됨. 함수를 호출하는 객체가 없기 때문.
    - 구조 분해 할당(또는 변수에 할당)도 마찬가지. 호출 당시에는 호출하는 객체없이 함수만 실행하고 있기 때문에, `this`를 상실한다.
 
@@ -92,3 +96,58 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 
    - [함수 바인딩](https://ko.javascript.info/bind)
    - ['this' is undefined in JavaScript class methods](https://stackoverflow.com/questions/4011793/this-is-undefined-in-javascript-class-methods)
+
+3. 환경 변수 사용
+
+   #### 문제 상황
+
+   weather 정보를 가져오기 위해 필요한 api key를 .env 파일로 분리시켜 은닉을 하고 싶었다. (요청이 있을때 노출되므로 완벽한 의미의 은닉은 아니다.) 하지만, `process is not defined` 에러가 발생
+
+   #### 원인
+
+   process는 Node에서 존재하고 브라우저에서는 존재하지 않기 때문에 not defined 에러가 발생
+
+   #### 해결 방법
+
+   이를 해결하기 위한 목적으로 웹팩을 사용한건 아니지만, 웹팩을 사용해 해결한 방법으로 기록한다. 이런 번들러나 테스크 러너를 사용하지 않고 해결하는 방법은 아직 잘 모르겠다. 하지만 이런 번들러를 사용하는 경우가 대다수라고 생각되고, gulp의 경우에도 [`gulp-dotenv`](https://www.npmjs.com/package/gulp-dotenv) 패키지가 존재한다.
+
+   1. [`dotenv`](https://www.npmjs.com/package/dotenv)를 설치하고, 웹팩 플러그인인 `EnvironmentPlugin`을 사용한다.
+
+      ```js
+      const webpack = require("webpack");
+      const dotenv = require("dotenv").config();
+
+      module.exports = {
+        // ...
+        plugins: [
+          new webpack.EnvironmentPlugin(Object.keys(dotenv.parsed || {})),
+        ],
+        // ...
+      };
+      ```
+
+      > 🧐 `EnvironmetnPlugin`?
+      >
+      > 웹팩에서 제공하는 `EnvironmentPlugin`은 노드 런타임(Node runtime)에서 `process.env`에 저장되는 환경 변수를 전역 변수로 등록하기 위한 플러그인이다.
+
+   2. [`dotenv-webpack`](https://www.npmjs.com/package/dotenv-webpack)을 설치하고, 웹팩 플러그인에 추가한다.
+
+      ```js
+      const Dotenv = require("dotenv-webpack");
+
+      module.exports = {
+        // ...
+        plugins: [new Dotenv()],
+        //...
+      };
+      ```
+
+   #### 참고
+
+   - [프론트엔드에서 API Key를 숨기는 법](https://velog.io/@0307kwon/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%97%90%EC%84%9C-API-Key%EB%A5%BC-%EC%88%A8%EA%B8%B0%EB%8A%94-%EB%B2%95)
+   - [자바스크립트 환경변수 설정하기](https://hjuu.tistory.com/24)
+   - [Webpack 러닝 가이드 - Webpack 플러그인 - 환경 변수 등록](https://yamoo9.gitbook.io/webpack/webpack/webpack-plugins/manage-env-variables)
+   - [How to access environment variables from the front-end](https://stackoverflow.com/questions/57663555/how-to-access-environment-variables-from-the-front-end)
+   - [dotenv](https://www.npmjs.com/package/dotenv)
+   - [dotenv-webpack](https://www.npmjs.com/package/dotenv-webpack)
+   - [gulp-dotenv](https://www.npmjs.com/package/gulp-dotenv)
