@@ -19,7 +19,7 @@ class BgImg {
   render() {
     const { imgNumber, $target } = this;
     const img = new Image();
-    img.src = `img/${imgNumber}.jpg`;
+    img.src = `./assets/images/${imgNumber}.jpg`;
 
     $target.setAttribute("style", `background-image: url(${img.src})`);
   }
