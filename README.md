@@ -144,6 +144,7 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 
    #### 참고
 
+   - [dotenv로 환경 변수 관리하기](https://www.daleseo.com/js-dotenv/)
    - [프론트엔드에서 API Key를 숨기는 법](https://velog.io/@0307kwon/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%97%90%EC%84%9C-API-Key%EB%A5%BC-%EC%88%A8%EA%B8%B0%EB%8A%94-%EB%B2%95)
    - [자바스크립트 환경변수 설정하기](https://hjuu.tistory.com/24)
    - [Webpack 러닝 가이드 - Webpack 플러그인 - 환경 변수 등록](https://yamoo9.gitbook.io/webpack/webpack/webpack-plugins/manage-env-variables)
