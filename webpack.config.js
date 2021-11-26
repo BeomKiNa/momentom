@@ -8,7 +8,6 @@ module.exports = {
   name: "momentom-setting",
   mode: "development",
   devtool: "eval",
-  watch: true,
   resolve: {
     extensions: [".js"],
   },
