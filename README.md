@@ -21,12 +21,20 @@ Cloning Momentum with Vanilla JS, HTML and CSS
 ### v1.0
 
 - 노마드코더의 Momentum clone
+- 접속 때마다 랜덤한 배경 이미지
+- 현재 시간 확인
+- 사용자 이름을 저장 (localStorage 사용)
+- To Do List 추가, 저장 및 삭제 (localStorage 사용)
+- 현재 위치에 따라 현재 날씨 조회 (OpenWeatherMap API 사용)
 
 ### v2.0
 
-- http-server 추가
+- ~~http-server 추가~~ Webpack dev server 추가
 - 기존의 함수로 구현한 내용을 class로 변경
 - HTML도 class내에서 생성해 추가하도록 변경
+- CSS를 SCSS로 변경
+- Webpack으로 빌드
+- Babel을 사용해 크로스 브라우징 해결
 
 ## 문제 상황과 해결 방법
 
