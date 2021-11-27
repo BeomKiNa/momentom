@@ -1,8 +1,11 @@
 const path = require("path");
+const fs = require("fs");
 const webpack = require("webpack");
 const dotenv = require("dotenv").config();
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   name: "momentom-setting",
@@ -42,22 +45,22 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin(Object.keys(dotenv.parsed || {})),
     new MiniCssExtractPlugin({ filename: "css/styles.css" }),
+    new HtmlWebpackPlugin({
+      template: path.join(fs.realpathSync(process.cwd()), "public/index.html"),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "./src/assets/images", to: "./assets/images" }],
+    }),
   ],
 
   output: {
     filename: "js/app.js",
     path: path.join(__dirname, "dist"),
-    publicPath: "/dist",
     clean: true,
   },
 
   devServer: {
-    devMiddleware: {
-      publicPath: "/dist",
-    },
-    static: {
-      directory: path.join(__dirname),
-    },
+    open: true,
     compress: true,
     hot: true,
   },
