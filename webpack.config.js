@@ -9,8 +9,8 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   name: "momentom-setting",
-  mode: "development",
-  devtool: "eval",
+  mode: "production",
+  devtool: "hidden-source-map",
   resolve: {
     extensions: [".js"],
   },
