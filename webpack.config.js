@@ -9,10 +9,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   name: "momentom-setting",
-  mode: "production",
+  mode: "development",
   devtool: "hidden-source-map",
   resolve: {
-    extensions: [".js"],
+    extensions: [".js", ".ts"],
   },
   entry: {
     app: "./src/js/index",
@@ -21,10 +21,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|ts)$/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env"],
+          presets: ["@babel/preset-env", "@babel/preset-typescript"],
         },
       },
       {
