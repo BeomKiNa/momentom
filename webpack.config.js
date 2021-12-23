@@ -24,7 +24,7 @@ module.exports = {
         test: /\.(js|ts)$/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-typescript"],
+          presets: ["@babel/preset-typescript"],
         },
       },
       {
