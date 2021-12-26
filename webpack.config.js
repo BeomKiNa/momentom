@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   name: "momentom-setting",
@@ -22,9 +23,11 @@ module.exports = {
     rules: [
       {
         test: /\.(js|ts)$/,
-        loader: "babel-loader",
-        options: {
-          presets: ["@babel/preset-typescript"],
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-typescript"],
+          },
         },
       },
       {
@@ -51,6 +54,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "./src/assets/images", to: "./assets/images" }],
     }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
 
   output: {
