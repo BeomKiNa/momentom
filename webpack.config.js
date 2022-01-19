@@ -11,18 +11,18 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 module.exports = {
   name: "momentom-setting",
   mode: "development",
-  devtool: "hidden-source-map",
+  devtool: "inline-cheap-module-source-map",
   resolve: {
     extensions: [".js", ".ts"],
   },
   entry: {
-    app: "./src/js/index",
+    app: "./src/ts/index",
   },
 
   module: {
     rules: [
       {
-        test: /\.(js|ts)$/,
+        test: /\.ts$/,
         use: {
           loader: "babel-loader",
           options: {
