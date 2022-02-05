@@ -1,13 +1,18 @@
-class BgImg {
-  static _IMG_NUM = 11;
-  imgNumber = 0;
+type Init = {
+  $target: HTMLElement;
+};
 
-  constructor({ $target }) {
+class BgImg {
+  private static _IMG_NUM: number = 11;
+  private imgNumber: number = 0;
+  $target: HTMLElement;
+
+  constructor({ $target }: Init) {
     this.$target = $target;
     this.setState();
   }
 
-  getRandom() {
+  getRandom(): number {
     return Math.floor(Math.random() * BgImg._IMG_NUM) + 1;
   }
 
