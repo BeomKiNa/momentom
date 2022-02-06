@@ -1,8 +1,21 @@
 import { DAYS } from "./constants.js";
 
+type Init = {
+  $target: HTMLElement;
+};
+
+type DateObj = {
+  seconds: null | number;
+  minutes: null | number;
+  hours: null | number;
+  day: null | number;
+  date: null | number;
+  month: null | number;
+};
+
 class Clock {
-  $clockWrap = null;
-  nowDate = {
+  private $clockWrap: HTMLElement;
+  private nowDate: DateObj = {
     seconds: null,
     minutes: null,
     hours: null,
@@ -11,7 +24,7 @@ class Clock {
     month: null,
   };
 
-  constructor({ $target }) {
+  constructor({ $target }: Init) {
     this.$clockWrap = document.createElement("article");
     this.$clockWrap.className = "clockWrap";
 
@@ -40,7 +53,7 @@ class Clock {
     });
   }
 
-  setState(nowDateObj) {
+  setState(nowDateObj: DateObj) {
     this.nowDate = nowDateObj;
     this.render();
   }
@@ -51,17 +64,19 @@ class Clock {
       $clockWrap,
     } = this;
 
-    $clockWrap.innerHTML = `
-        <p class="dateText">
-            ${month < 10 ? `0${month}` : month} /
-            ${date < 10 ? `0${date}` : date} ${DAYS[day]}
-        </p>
-        <p class="timeText">
-            ${hours < 10 ? `0${hours}` : hours} :
-            ${minutes < 10 ? `0${minutes}` : minutes} :
-            ${seconds < 10 ? `0${seconds}` : seconds}
-        </p>
+    if (seconds && minutes && hours && day && date && month) {
+      $clockWrap.innerHTML = `
+      <p class="dateText">
+      ${month < 10 ? `0${month}` : month} /
+      ${date < 10 ? `0${date}` : date} ${DAYS[day]}
+      </p>
+      <p class="timeText">
+      ${hours < 10 ? `0${hours}` : hours} :
+      ${minutes < 10 ? `0${minutes}` : minutes} :
+      ${seconds < 10 ? `0${seconds}` : seconds}
+      </p>
       `;
+    }
   }
 }
 
