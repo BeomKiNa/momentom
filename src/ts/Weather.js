@@ -1,4 +1,4 @@
-import { COORDS } from "./constants.js";
+import { COORDS } from "./constants";
 
 class Weather {
   $weather = null;

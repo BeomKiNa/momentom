@@ -1,7 +1,7 @@
-import { FINISHED, PENDING } from "./constants.js";
-import Finished from "./Finished.js";
-import Pending from "./Pending.js";
-import TaskForm from "./TaskForm.js";
+import { FINISHED, PENDING } from "./constants";
+import Finished from "./Finished";
+import Pending from "./Pending";
+import TaskForm from "./TaskForm";
 
 class TasksContainer {
   constructor({ $target }) {

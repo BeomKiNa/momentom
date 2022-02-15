@@ -1,4 +1,4 @@
-import { DAYS } from "./constants.js";
+import { DAYS } from "./constants";
 
 type Init = {
   $target: HTMLElement;

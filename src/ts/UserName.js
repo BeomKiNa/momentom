@@ -1,4 +1,4 @@
-import { USER_NAME } from "./constants.js";
+import { USER_NAME } from "./constants";
 
 class UserName {
   userName = null;

@@ -1,5 +1,5 @@
-import { BACK, BTN } from "./constants.js";
-import TasksList from "./TasksList.js";
+import { BACK, BTN } from "./constants";
+import TasksList from "./TasksList";
 
 class Finished extends TasksList {
   constructor({ $target, handleBack, title }) {

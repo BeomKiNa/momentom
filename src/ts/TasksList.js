@@ -1,4 +1,4 @@
-import { BTN, DEL } from "./constants.js";
+import { BTN, DEL } from "./constants";
 
 class TasksList {
   _tasks = [];

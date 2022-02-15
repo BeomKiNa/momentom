@@ -1,5 +1,5 @@
-import { BTN, CHECK } from "./constants.js";
-import TasksList from "./TasksList.js";
+import { BTN, CHECK } from "./constants";
+import TasksList from "./TasksList";
 
 class Pending extends TasksList {
   constructor({ $target, handleCheck, title }) {
