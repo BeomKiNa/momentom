@@ -4,30 +4,31 @@ import Pending from "./Pending";
 import TaskForm from "./TaskForm";
 
 class TasksContainer {
+  $listWrap: HTMLElement;
   constructor({ $target }) {
     this.$listWrap = document.createElement("section");
     this.$listWrap.className = "listWrap cf";
 
-    this.taskForm = new TaskForm({
+    const taskForm = new TaskForm({
       $target: this.$listWrap,
       handleNewTask: (text) => {
         const taskObj = {
           id: String(Date.now()),
           text,
         };
-        this.pending.addTask(taskObj);
+        pending.addTask(taskObj);
       },
     });
 
-    this.pending = new Pending({
+    const pending = new Pending({
       $target: this.$listWrap,
-      handleCheck: (taskObj) => this.finished.addTask(taskObj),
+      handleCheck: (taskObj) => finished.addTask(taskObj),
       title: PENDING,
     });
 
-    this.finished = new Finished({
+    const finished = new Finished({
       $target: this.$listWrap,
-      handleBack: (taskObj) => this.pending.addTask(taskObj),
+      handleBack: (taskObj) => pending.addTask(taskObj),
       title: FINISHED,
     });
 
