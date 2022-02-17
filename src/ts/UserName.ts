@@ -1,8 +1,8 @@
 import { USER_NAME } from "./constants";
 
 class UserName {
-  userName = null;
-  $userWrap = null;
+  userName: string | null = null;
+  $userWrap: HTMLElement;
 
   constructor({ $target }) {
     this.$userWrap = document.createElement("div");
@@ -17,7 +17,7 @@ class UserName {
   }
 
   getUser() {
-    const name = JSON.parse(localStorage.getItem(USER_NAME));
+    const name = JSON.parse(localStorage.getItem(USER_NAME)! as string);
     this.setState(name);
   }
 
@@ -47,7 +47,7 @@ class UserName {
         </form>
         `;
 
-      $userWrap.querySelector("form").addEventListener("submit", onSubmit);
+      $userWrap.querySelector("form")!.addEventListener("submit", onSubmit);
     }
   }
 }

@@ -1,6 +1,6 @@
 import Clock from "./Clock";
 import TasksContainer from "./TasksContainer";
-import UserName from "./userName";
+import UserName from "./UserName";
 import Weather from "./weather";
 
 class Content {
