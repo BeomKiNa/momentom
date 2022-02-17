@@ -1,8 +1,8 @@
 import { USER_NAME } from "./constants";
 
 class UserName {
-  userName: string | null = null;
-  $userWrap: HTMLElement;
+  private userName: string | null = null;
+  private $userWrap: HTMLElement;
 
   constructor({ $target }) {
     this.$userWrap = document.createElement("div");
