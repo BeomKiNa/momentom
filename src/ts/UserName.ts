@@ -30,7 +30,7 @@ class UserName {
     this.setState(value);
   }
 
-  setState(name) {
+  setState(name: string) {
     this.userName = name;
     this.setUser();
     this.render();
