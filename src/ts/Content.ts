@@ -1,7 +1,7 @@
 import Clock from "./Clock";
 import TasksContainer from "./TasksContainer";
 import UserName from "./UserName";
-import Weather from "./weather";
+import Weather from "./Weather";
 
 class Content {
   private $target: HTMLElement;

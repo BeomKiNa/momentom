@@ -1,7 +1,16 @@
 import { COORDS } from "./constants";
 
+type Coords = {
+  latitude: string | null;
+  longitude: string | null;
+};
+
 class Weather {
-  $weather = null;
+  private $weather: HTMLElement;
+  private coordsObj: Coords = {
+    latitude: null,
+    longitude: null,
+  };
 
   constructor({ $target }) {
     this.$weather = document.createElement("span");
@@ -51,7 +60,8 @@ class Weather {
   }
 
   loadCoords() {
-    const getCoords = JSON.parse(localStorage.getItem(COORDS)) || null;
+    const getCoords =
+      JSON.parse(localStorage.getItem(COORDS)! as string) || null;
     if (getCoords === null) {
       this.askForCoords();
     } else {
@@ -59,7 +69,7 @@ class Weather {
     }
   }
 
-  setState(coordsObj) {
+  setState(coordsObj: Coords) {
     this.coordsObj = coordsObj;
     this.saveCoords();
     this.getWeather();
