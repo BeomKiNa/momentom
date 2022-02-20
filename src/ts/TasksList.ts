@@ -1,11 +1,21 @@
 import { BTN, DEL } from "./constants";
 
-class TasksList {
-  _tasks = [];
-  title = null;
-  $wrap = null;
+type Init = {
+  $target: HTMLElement;
+  title: string;
+};
 
-  constructor({ $target, title }) {
+type Task = {
+  id: string;
+  text: string;
+};
+
+class TasksList {
+  private tasks: Array<Task> | [] = [];
+  private title: string;
+  private $wrap: HTMLElement;
+
+  constructor({ $target, title }: Init) {
     this.title = title;
     this.$wrap = document.createElement("article");
     $target.appendChild(this.$wrap);
@@ -14,19 +24,19 @@ class TasksList {
   }
 
   saveTasks() {
-    localStorage.setItem(this.title, JSON.stringify(this._tasks));
+    localStorage.setItem(this.title, JSON.stringify(this.tasks));
   }
 
   getTasks() {
-    this.setState(JSON.parse(localStorage.getItem(this.title)) || []);
+    this.setState(JSON.parse(localStorage.getItem(this.title)!) || []);
   }
 
-  addTask(newTaskObj) {
-    this.setState([...this._tasks, newTaskObj]);
+  addTask(newTaskObj: Task) {
+    this.setState([...this.tasks, newTaskObj]);
   }
 
-  deleteTask(delTaskId) {
-    this.setState(this._tasks.filter((task) => task.id !== delTaskId));
+  deleteTask(delTaskId: string) {
+    this.setState(this.tasks.filter((task: Task) => task.id !== delTaskId));
   }
 
   handleBtn(e) {
@@ -43,17 +53,17 @@ class TasksList {
   }
 
   setState(tasks) {
-    this._tasks = tasks;
+    this.tasks = tasks;
     this.saveTasks();
     this.render();
   }
 
   render() {
-    const { $wrap, _tasks, handleBtn, title } = this;
+    const { $wrap, tasks, handleBtn, title } = this;
     $wrap.innerHTML = `
       <h4>${title[0].toUpperCase() + title.slice(1)}</h4>
       <ul class="${title}">
-        ${_tasks
+        ${tasks
           .map(
             (task) =>
               `<li id=${task.id}>${task.text}<button class="${DEL} ${BTN}">❌</button></li>`
@@ -62,8 +72,8 @@ class TasksList {
       </ul>
     `;
 
-    _tasks.length &&
-      $wrap.querySelector("ul").addEventListener("click", handleBtn);
+    tasks.length &&
+      $wrap.querySelector("ul")!.addEventListener("click", handleBtn);
   }
 }
 
