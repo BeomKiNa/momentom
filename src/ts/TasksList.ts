@@ -10,8 +10,15 @@ type Task = {
   text: string;
 };
 
-class TasksList {
-  private tasks: Array<Task> | [] = [];
+type Tasks = Array<Task> | [];
+
+interface TaskListComponent {
+  addTask(newTaskObj: Task): void;
+  deleteTask(delTaskId: string): void;
+}
+
+class TasksList implements TaskListComponent {
+  private tasks: Tasks = [];
   private title: string;
   private $wrap: HTMLElement;
 
@@ -52,7 +59,7 @@ class TasksList {
     }
   }
 
-  setState(tasks) {
+  setState(tasks: Tasks) {
     this.tasks = tasks;
     this.saveTasks();
     this.render();
