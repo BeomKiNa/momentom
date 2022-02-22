@@ -5,7 +5,7 @@ type Init = {
   title: string;
 };
 
-type Task = {
+export type Task = {
   id: string;
   text: string;
 };

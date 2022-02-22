@@ -2,6 +2,7 @@ import { FINISHED, PENDING } from "./constants";
 import Finished from "./Finished";
 import Pending from "./Pending";
 import TaskForm from "./TaskForm";
+import { Task } from "./TasksList";
 
 class TasksContainer {
   $listWrap: HTMLElement;
@@ -11,7 +12,7 @@ class TasksContainer {
 
     const taskForm = new TaskForm({
       $target: this.$listWrap,
-      handleNewTask: (text) => {
+      handleNewTask: (text: string) => {
         const taskObj = {
           id: String(Date.now()),
           text,
@@ -22,13 +23,13 @@ class TasksContainer {
 
     const pending = new Pending({
       $target: this.$listWrap,
-      handleCheck: (taskObj) => finished.addTask(taskObj),
+      handleCheck: (taskObj: Task) => finished.addTask(taskObj),
       title: PENDING,
     });
 
     const finished = new Finished({
       $target: this.$listWrap,
-      handleBack: (taskObj) => pending.addTask(taskObj),
+      handleBack: (taskObj: Task) => pending.addTask(taskObj),
       title: FINISHED,
     });
 
