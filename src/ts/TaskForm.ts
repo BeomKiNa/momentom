@@ -1,6 +1,6 @@
 class TaskForm {
-  handleNewTask = null;
-  $form = null;
+  private handleNewTask: (text: string) => void;
+  private $form: HTMLElement;
 
   constructor({ $target, handleNewTask }) {
     this.handleNewTask = handleNewTask;
