@@ -18,9 +18,9 @@ interface TaskListComponent {
 }
 
 class TasksList implements TaskListComponent {
-  private tasks: Tasks = [];
+  protected tasks: Tasks = [];
   private title: string;
-  private $wrap: HTMLElement;
+  protected $wrap: HTMLElement;
 
   constructor({ $target, title }: Init) {
     this.title = title;
