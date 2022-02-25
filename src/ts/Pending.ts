@@ -1,7 +1,8 @@
 import { BTN, CHECK } from "./constants";
-import TasksList from "./TasksList";
+import TasksList, { Task } from "./TasksList";
 
 class Pending extends TasksList {
+  handleCheck: (taskObj: Task) => void;
   constructor({ $target, handleCheck, title }) {
     super({ $target, title });
     this.handleCheck = handleCheck;
@@ -9,15 +10,17 @@ class Pending extends TasksList {
 
   handleBtn(e) {
     super.handleBtn(e);
-    const $target = e.target;
+    const $target: HTMLElement = e.target;
     const classList = $target.classList;
     const $targetLi = $target.parentNode;
-    const id = $targetLi.id;
+    const id = $targetLi!["id"];
 
     if (classList.contains(CHECK)) {
-      const checkTask = this._tasks.find((task) => task.id === id);
+      const checkTask: Task | undefined = this.tasks.find(
+        (task) => task.id === id
+      );
       this.deleteTask(id);
-      this.handleCheck(checkTask);
+      checkTask && this.handleCheck(checkTask);
     }
   }
 
