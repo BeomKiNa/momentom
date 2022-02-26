@@ -14,6 +14,8 @@ class Pending extends TasksList {
     const classList = $target.classList;
     const $targetLi = $target.parentNode;
     const id = $targetLi!["id"];
+    // const id = $targetLi!.id; // error
+    // https://stackoverflow.com/questions/38250575/typescript-property-id-does-not-exist-on-type-node
 
     if (classList.contains(CHECK)) {
       const checkTask: Task | undefined = this.tasks.find(
