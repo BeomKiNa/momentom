@@ -1,7 +1,8 @@
 import { BACK, BTN } from "./constants";
-import TasksList from "./TasksList";
+import TasksList, { Task } from "./TasksList";
 
 class Finished extends TasksList {
+  handleBack: (taskObj: Task) => void;
   constructor({ $target, handleBack, title }) {
     super({ $target, title });
     this.handleBack = handleBack;
@@ -9,15 +10,19 @@ class Finished extends TasksList {
 
   handleBtn(e) {
     super.handleBtn(e);
-    const $target = e.target;
+    const $target: HTMLElement = e.target;
     const classList = $target.classList;
     const $targetLi = $target.parentNode;
-    const id = $targetLi.id;
+    const id = $targetLi!["id"];
+    // const id = $targetLi!.id; // error
+    // https://stackoverflow.com/questions/38250575/typescript-property-id-does-not-exist-on-type-node
 
     if (classList.contains(BACK)) {
-      const backTask = this._tasks.find((task) => task.id === id);
+      const backTask: Task | undefined = this.tasks.find(
+        (task: Task) => task.id === id
+      );
       this.deleteTask(id);
-      this.handleBack(backTask);
+      backTask && this.handleBack(backTask);
     }
   }
 
